@@ -1,256 +1,211 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi princesita hermosa 💖</title>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(180deg, #ffe6f2, #ffd6eb, #fff0f6);
-    overflow: hidden;
-    font-family: 'Comic Sans MS', cursive;
-    position: relative;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi princesita hermosa 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Neue', cursive;
+    }
 
-  h1 {
-    text-align: center;
-    font-size: 2.5em;
-    color: #ff8ccf;
-    margin-top: 50px;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid #ffb6d9;
-    width: 0;
-    animation: escribir 4s steps(30) 1s forwards, brillo 2s infinite alternate;
-  }
+    body {
+      background: linear-gradient(180deg, #ffe6f0 0%, #ffd6ec 100%);
+      overflow: hidden;
+      color: #ff4da6;
+      text-align: center;
+      height: 100vh;
+    }
 
-  @keyframes escribir {
-    to { width: 100%; border-right: none; }
-  }
+    h1 {
+      font-size: 2.5em;
+      margin-top: 50px;
+      color: #ff5cad;
+      animation: escribir 3s steps(30) 1 normal both;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #ff85c1;
+      width: 22ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-  @keyframes brillo {
-    0% { text-shadow: 0 0 5px #ffb6d9; }
-    100% { text-shadow: 0 0 20px #ff66b3; }
-  }
+    @keyframes escribir {
+      from { width: 0; }
+      to { width: 22ch; }
+    }
 
-  #contador {
-    text-align: center;
-    color: #ff66b3;
-    font-size: 1.2em;
-    margin-top: 10px;
-  }
+    .contador {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #ff5cad;
+      font-weight: bold;
+    }
 
-  #mensaje-dia-btn {
-    display: block;
-    margin: 30px auto;
-    padding: 10px 25px;
-    background-color: #ff9fd0;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    button {
+      margin-top: 30px;
+      background-color: #ff80bf;
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 20px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
-  #mensaje-dia-btn:hover {
-    background-color: #ff6fb1;
-  }
+    button:hover {
+      background-color: #ff4da6;
+    }
 
-  .gatito {
-    position: absolute;
-    width: 90px;
-    bottom: 0;
-    animation: moverGato 10s infinite alternate ease-in-out;
-  }
+    /* Fondo animado */
+    .fondo {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
 
-  @keyframes moverGato {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(50px); }
-  }
+    .nube, .corazon, .gato {
+      position: absolute;
+      opacity: 0.8;
+      animation: flotar 25s linear infinite;
+    }
 
-  .nube, .corazon {
-    position: absolute;
-    opacity: 0.15;
-    animation: flotar 60s linear infinite;
-  }
+    @keyframes flotar {
+      from { transform: translateY(100vh); opacity: 0.8; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
 
-  .nube {
-    filter: drop-shadow(0 0 10px #ffd6eb);
-  }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 192, 203, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .corazon {
-    filter: drop-shadow(0 0 10px #ff99cc);
-  }
+    .contenido-modal {
+      background: #fff0f6;
+      border-radius: 20px;
+      padding: 25px;
+      width: 85%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: aparecer 0.5s ease;
+    }
 
-  @keyframes flotar {
-    from { transform: translateX(-100px) translateY(0); }
-    to { transform: translateX(100vw) translateY(-50px); }
-  }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-  .mensaje-flotante {
-    position: absolute;
-    color: #ff80c0;
-    opacity: 0;
-    font-size: 1.1em;
-    animation: flotarTexto 8s linear infinite;
-  }
+    .contenido-modal img {
+      width: 150px;
+      height: 150px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 3px solid #ffb6d9;
+    }
 
-  @keyframes flotarTexto {
-    0% { opacity: 0; transform: translateY(0); }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-100px); }
-  }
+    .mensaje {
+      font-size: 1.1em;
+      text-align: left;
+      color: #ff4da6;
+      min-height: 100px;
+      white-space: pre-line;
+    }
 
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 220, 240, 0.9);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 0 20px #ffb6d9;
-    color: #ff66b3;
-    font-size: 1.4em;
-    max-width: 320px;
-    animation: zoomIn 0.8s ease;
-  }
-
-  @keyframes zoomIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-
-  .firma {
-    text-align: center;
-    color: #ff80c0;
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    font-size: 1em;
-  }
-</style>
+    .firma {
+      margin-top: 30px;
+      font-style: italic;
+      color: #ff4da6;
+      font-size: 1.1em;
+    }
+  </style>
 </head>
 <body>
+  <div class="fondo" id="fondo"></div>
 
-<h1 id="titulo"></h1>
-<div id="contador"></div>
+  <h1>Para mi princesita hermosa</h1>
+  <div class="contador" id="contador"></div>
 
-<button id="mensaje-dia-btn">💌 Ver mensaje del día 💌</button>
+  <button onclick="mostrarMensaje()">💌 Ver mensaje del día 💌</button>
 
-<div class="modal" id="modal">
-  <div class="modal-content" id="mensajeDia"></div>
-</div>
+  <div class="modal" id="modal">
+    <div class="contenido-modal">
+      <img src="tu-foto.jpg" alt="Nuestra foto juntos">
+      <div class="mensaje" id="mensaje"></div>
+    </div>
+  </div>
 
-<!-- Gatitos -->
-<img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="gatito" style="left: 15%;">
-<img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="gatito" style="right: 15%; animation-delay: 2s;">
+  <div class="firma">Con amor, de tu amorcito 💞 Desde el 20 de julio de 2025</div>
 
-<div class="firma">Con amor, de tu amorcito 💞 Desde el 20 de julio de 2025</div>
-
-<script>
-  // Título animado
-  const tituloTexto = "Para mi princesita hermosa 💖";
-  const tituloElemento = document.getElementById("titulo");
-  let i = 0;
-  function escribirTitulo() {
-    if (i < tituloTexto.length) {
-      tituloElemento.textContent += tituloTexto.charAt(i);
-      i++;
-      setTimeout(escribirTitulo, 100);
+  <script>
+    // 🎀 Animaciones del fondo (nubes, corazones y gatitos)
+    const fondo = document.getElementById("fondo");
+    const emojis = ["☁️", "🐱", "💖", "💞", "☁️", "🐾", "💗"];
+    for (let i = 0; i < 25; i++) {
+      const elem = document.createElement("div");
+      elem.className = "nube";
+      elem.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      elem.style.left = Math.random() * 100 + "vw";
+      elem.style.fontSize = 20 + Math.random() * 25 + "px";
+      elem.style.animationDuration = 15 + Math.random() * 20 + "s";
+      fondo.appendChild(elem);
     }
-  }
-  escribirTitulo();
 
-  // Contador desde el 20 de julio de 2025
-  const inicio = new Date("July 20, 2025 00:00:00");
-  const contador = document.getElementById("contador");
-  setInterval(() => {
-    const ahora = new Date();
-    const diff = ahora - inicio;
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    contador.textContent = `💞 Han pasado ${dias} días desde que comenzó mi amor por ti 💞`;
-  }, 1000);
+    // 💖 Contador desde el 20 de julio de 2025
+    const contador = document.getElementById("contador");
+    const fechaInicio = new Date("2025-07-20T00:00:00");
 
-  // Mensaje del día
-  const mensajeDia = "Eres mi gatita hermosa, mi razón de ser 💗";
-
-  function mostrarMensaje() {
-    const modal = document.getElementById("modal");
-    const msg = document.getElementById("mensajeDia");
-    modal.style.display = "flex";
-    msg.textContent = "";
-    let j = 0;
-    function escribirMsg() {
-      if (j < mensajeDia.length) {
-        msg.textContent += mensajeDia.charAt(j);
-        j++;
-        setTimeout(escribirMsg, 50);
-      }
+    function actualizarContador() {
+      const hoy = new Date();
+      const diff = hoy - fechaInicio;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      contador.textContent = `💞 Han pasado ${dias} días desde que comenzó mi amor por ti 💞`;
     }
-    escribirMsg();
-  }
+    actualizarContador();
+    setInterval(actualizarContador, 86400000);
 
-  document.getElementById("mensaje-dia-btn").addEventListener("click", mostrarMensaje);
-  document.getElementById("modal").addEventListener("click", () => {
-    document.getElementById("modal").style.display = "none";
-  });
+    // 💌 Mostrar mensaje con animación de escritura
+    const mensajeDia = "Eres la razón por la que cada día sonrío 💕\nGracias por existir, mi princesita. 🌸";
 
-  // Nubes y corazones flotantes
-  for (let n = 0; n < 4; n++) {
-    const nube = document.createElement("img");
-    nube.src = "https://cdn-icons-png.flaticon.com/512/414/414927.png";
-    nube.classList.add("nube");
-    nube.style.width = Math.random() * 80 + 50 + "px";
-    nube.style.top = Math.random() * 50 + "vh";
-    nube.style.left = Math.random() * 100 + "vw";
-    nube.style.animationDuration = 60 + Math.random() * 40 + "s";
-    document.body.appendChild(nube);
-  }
+    function mostrarMensaje() {
+      document.getElementById("modal").style.display = "flex";
+      escribirMensaje(mensajeDia);
+    }
 
-  for (let c = 0; c < 6; c++) {
-    const corazon = document.createElement("img");
-    corazon.src = "https://cdn-icons-png.flaticon.com/512/833/833472.png";
-    corazon.classList.add("corazon");
-    corazon.style.width = Math.random() * 40 + 30 + "px";
-    corazon.style.top = Math.random() * 60 + "vh";
-    corazon.style.left = Math.random() * 100 + "vw";
-    corazon.style.animationDuration = 50 + Math.random() * 30 + "s";
-    document.body.appendChild(corazon);
-  }
+    function escribirMensaje(texto) {
+      const mensajeDiv = document.getElementById("mensaje");
+      mensajeDiv.textContent = "";
+      let i = 0;
+      const intervalo = setInterval(() => {
+        if (i < texto.length) {
+          mensajeDiv.textContent += texto.charAt(i);
+          i++;
+        } else {
+          clearInterval(intervalo);
+        }
+      }, 50);
+    }
 
-  // Mensajes flotantes románticos
-  const frases = [
-    "Eres mi cielo rosado ☁️", "Mi gatita hermosa 💕", "Contigo todo es ternura 🐾",
-    "Tu amor me acaricia el alma 💞", "Mi corazón ronronea por ti 😻",
-    "Eres mi nube favorita ☁️", "Cada día contigo es magia ✨", "Eres mi lugar seguro 💗",
-    "Eres mi todo, mi amor 💘", "Mi vida es más dulce contigo 🍓"
-  ];
-
-  function crearMensajeFlotante() {
-    const mensaje = document.createElement("div");
-    mensaje.classList.add("mensaje-flotante");
-    mensaje.textContent = frases[Math.floor(Math.random() * frases.length)];
-    mensaje.style.left = Math.random() * 80 + "vw";
-    mensaje.style.top = Math.random() * 60 + "vh";
-    document.body.appendChild(mensaje);
-    setTimeout(() => mensaje.remove(), 8000);
-  }
-  setInterval(crearMensajeFlotante, 5000);
-</script>
+    // Cerrar el modal al hacer clic fuera del mensaje
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      if (event.target === modal) modal.style.display = "none";
+    };
+  </script>
 </body>
 </html>
