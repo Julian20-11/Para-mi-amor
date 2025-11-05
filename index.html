@@ -71,7 +71,7 @@
       z-index: -1;
     }
 
-    .nube, .corazon, .gato {
+    .nube {
       position: absolute;
       opacity: 0.8;
       animation: flotar 25s linear infinite;
@@ -82,6 +82,7 @@
       to { transform: translateY(-10vh); opacity: 0; }
     }
 
+    /* Modal oculto por defecto */
     .modal {
       display: none;
       position: fixed;
@@ -89,7 +90,6 @@
       width: 100%;
       height: 100%;
       background-color: rgba(255, 192, 203, 0.4);
-      display: flex;
       justify-content: center;
       align-items: center;
     }
@@ -143,6 +143,7 @@
 
   <button onclick="mostrarMensaje()">💌 Ver mensaje del día 💌</button>
 
+  <!-- Modal inicialmente oculto -->
   <div class="modal" id="modal">
     <div class="contenido-modal">
       <img src="nuestra-foto.jpg" alt="Nuestra foto juntos">
@@ -153,7 +154,7 @@
   <div class="firma">Con amor, de tu amorcito 💞 Desde el 20 de julio de 2025</div>
 
   <script>
-    // 🎀 Animaciones del fondo (nubes, corazones y gatitos)
+    // 🎀 Animaciones del fondo
     const fondo = document.getElementById("fondo");
     const emojis = ["☁️", "🐱", "💖", "💞", "☁️", "🐾", "💗"];
     for (let i = 0; i < 25; i++) {
@@ -179,13 +180,12 @@
     actualizarContador();
     setInterval(actualizarContador, 86400000);
 
-    // 💌 Mostrar mensaje con animación de escritura
-    const mensajeDia = "Te amo de verdad, con todo lo que soy y sin medidas.
-No hay un solo día en que no piense en ti, ni un momento en el que no te quiera.
-solo quiero que nunca dudes de lo que siento, porque es real, constante y solo tuyo. 💖";
+    // 💌 Mensaje del día
+    const mensajeDia = "Te amo de verdad, con todo lo que soy y sin medidas.\nNo hay un solo día en que no piense en ti, ni un momento en el que no te quiera.\nSolo quiero que nunca dudes de lo que siento, porque es real, constante y solo tuyo. 💖";
 
     function mostrarMensaje() {
-      document.getElementById("modal").style.display = "flex";
+      const modal = document.getElementById("modal");
+      modal.style.display = "flex";
       escribirMensaje(mensajeDia);
     }
 
@@ -203,7 +203,7 @@ solo quiero que nunca dudes de lo que siento, porque es real, constante y solo t
       }, 50);
     }
 
-    // Cerrar el modal al hacer clic fuera del mensaje
+    // Cierra el modal al hacer clic fuera del cuadro
     window.onclick = function(event) {
       const modal = document.getElementById("modal");
       if (event.target === modal) modal.style.display = "none";
