@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Amor 💖</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(#ffd1e8, #ffc4dd);
+    font-family: 'Comic Sans MS', cursive;
+    position: relative;
+    animation: aparecerFondo 3s ease-in-out;
+  }
+
+  @keyframes aparecerFondo {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* NUBES DE GATICOS */
+  .gato-nube {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 35px;
+    box-shadow: 12px 6px 0 0 white, 25px 3px 0 0 white;
+    animation: flotarGato 25s infinite ease-in-out alternate;
+    opacity: 0.8;
+  }
+
+  .gato-nube::before, .gato-nube::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .gato-nube::before { top: -5px; left: 3px; }
+  .gato-nube::after { top: -5px; left: 40px; }
+
+  @keyframes flotarGato {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* GATITOS KAWAII */
+  .gatito {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    animation: saltito 4s infinite ease-in-out;
+  }
+
+  .gatito:nth-child(1) { left: 10%; animation-delay: 0s; }
+  .gatito:nth-child(2) { left: 40%; animation-delay: 2s; }
+  .gatito:nth-child(3) { left: 70%; animation-delay: 1s; }
+
+  @keyframes saltito {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .titulo {
+    color: #ff5e9c;
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #ff85c1;
+    animation: escribirTitulo 4s steps(40) 1 normal both;
+  }
+
+  @keyframes escribirTitulo {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .contador {
+    text-align: center;
+    color: #ff4fa5;
+    font-size: 1.2em;
+  }
+
+  .boton-mensaje {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff82b7;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+  }
+  .boton-mensaje:hover {
+    background-color: #ff5ea6;
+  }
+
+  .mensaje-aleatorio {
+    position: absolute;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 20px;
+    color: #ff3e9e;
+    font-size: 1em;
+    animation: flotar 10s ease-in-out infinite;
+  }
+
+  @keyframes flotar {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-20px); opacity: 0.5; }
+  }
+
+  .te-amo {
+    position: absolute;
+    color: #ff1e78;
+    font-size: 2em;
+    animation: desaparecer 1s ease-in-out forwards;
+  }
+
+  @keyframes desaparecer {
+    to { opacity: 0; transform: translateY(-50px); }
+  }
+
+  footer {
+    text-align: center;
+    font-size: 1em;
+    color: #ff5ea6;
+    margin-top: 20px;
+  }
+
+  /* MODAL MENSAJE DEL DÍA */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 192, 203, 0.5);
+    justify-content: center;
+    align-items: center;
+    animation: aparecerModal 0.5s ease;
+  }
+
+  .modal-contenido {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    max-width: 80%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .cerrar {
+    background: #ff8dc7;
+    border: none;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Nubes -->
+  <div class="gato-nube" style="top:10%; left:15%;"></div>
+  <div class="gato-nube" style="top:25%; left:65%;"></div>
+  <div class="gato-nube" style="top:70%; left:40%;"></div>
+
+  <h1 class="titulo">💞 Nuestro Amor 💞</h1>
+  <button class="boton-mensaje" onclick="abrirModal()">💌 Ver mensaje del día 💌</button>
+  <div class="contador" id="contador"></div>
+
+  <footer>Con amor, tu Jhondy 💖 Desde el 20 de julio de 2025 a la 1:30 p.m.</footer>
+
+  <!-- Gatitos animados -->
+  <img src="https://i.imgur.com/fhGh1rO.png" class="gatito" alt="gatito1">
+  <img src="https://i.imgur.com/rvbYb3R.png" class="gatito" alt="gatito2">
+  <img src="https://i.imgur.com/5DEe95K.png" class="gatito" alt="gatito3">
+
+  <!-- Modal del mensaje del día -->
+  <div class="modal" id="modalMensaje">
+    <div class="modal-contenido">
+      <h2 style="color:#ff5e9c;">💖 Mensaje del día 💖</h2>
+      <p id="mensajeDia" style="color:#ff85c1; font-size:1.3em;">
+        Hoy solo quiero recordarte que eres mi razón para sonreír cada día 💕
+      </p>
+      <button class="cerrar" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+<script>
+  const inicio = new Date('2025-07-20T13:30:00');
+  const mensajes = [
+    "Eres mi lugar favorito 💕", "Cada día te amo más 💗", "Tu sonrisa ilumina mis días 🌞",
+    "Gracias por existir ✨", "Mi corazón late por ti ❤️", "Eres mi sueño hecho realidad 🌙",
+    "Contigo todo es mejor 💞", "Eres mi paz, mi alegría y mi hogar 🏠",
+    "Te pienso más de lo que imaginas 💭", "Tu voz es mi melodía favorita 🎶",
+    "Eres el poema que no quiero dejar de leer 📖", "Mi vida cambió desde que llegaste 💫",
+    "Eres mi inspiración 🌷", "Tú haces que todo valga la pena 🌈",
+    "Nada me hace más feliz que verte sonreír 😍", "Siempre serás mi persona favorita 💘",
+    "Tus abrazos son mi refugio 🤗", "Contigo aprendí lo que es amar 💓",
+    "Te amo más de lo que las palabras pueden decir 💬", "Eres y siempre serás mi destino ✨"
+  ];
+
+  function actualizarContador() {
+    const ahora = new Date();
+    const diferencia = ahora - inicio;
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferencia / 1000) % 60);
+    document.getElementById('contador').textContent =
+      `Han pasado ${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos desde que comenzó nuestro amor ❤️`;
+  }
+  setInterval(actualizarContador, 1000);
+
+  // Mensajes aleatorios, evitando zona central
+  function crearMensajeAleatorio() {
+    const mensaje = document.createElement('div');
+    mensaje.className = 'mensaje-aleatorio';
+    mensaje.textContent = mensajes[Math.floor(Math.random() * mensajes.length)];
+
+    let top, left;
+    do {
+      top = Math.random() * 80;
+      left = Math.random() * 80;
+    } while (top > 35 && top < 65 && left > 25 && left < 75); // evita el centro
+
+    mensaje.style.top = `${top}%`;
+    mensaje.style.left = `${left}%`;
+    document.body.appendChild(mensaje);
+    setTimeout(() => mensaje.remove(), 6000);
+  }
+  setInterval(crearMensajeAleatorio, 3500);
+
+  // Efecto de Te amo
+  document.body.addEventListener('click', e => {
+    const teAmo = document.createElement('div');
+    teAmo.className = 'te-amo';
+    teAmo.textContent = '💖 Te amo 💖';
+    teAmo.style.top = `${e.clientY}px`;
+    teAmo.style.left = `${e.clientX}px`;
+    document.body.appendChild(teAmo);
+    setTimeout(() => teAmo.remove(), 1000);
+  });
+
+  // Modal
+  function abrirModal() {
+    document.getElementById('modalMensaje').style.display = 'flex';
+  }
+  function cerrarModal() {
+    document.getElementById('modalMensaje').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
