@@ -37,7 +37,7 @@
 
   #contador {
     text-align: center;
-    color: #ff80c0;
+    color: #ff66b3;
     font-size: 1.2em;
     margin-top: 10px;
   }
@@ -71,28 +71,38 @@
     100% { transform: translateX(50px); }
   }
 
+  .nube, .corazon {
+    position: absolute;
+    opacity: 0.15;
+    animation: flotar 60s linear infinite;
+  }
+
+  .nube {
+    filter: drop-shadow(0 0 10px #ffd6eb);
+  }
+
+  .corazon {
+    filter: drop-shadow(0 0 10px #ff99cc);
+  }
+
+  @keyframes flotar {
+    from { transform: translateX(-100px) translateY(0); }
+    to { transform: translateX(100vw) translateY(-50px); }
+  }
+
   .mensaje-flotante {
     position: absolute;
     color: #ff80c0;
     opacity: 0;
     font-size: 1.1em;
-    animation: flotar 8s linear infinite;
+    animation: flotarTexto 8s linear infinite;
   }
 
-  @keyframes flotar {
+  @keyframes flotarTexto {
     0% { opacity: 0; transform: translateY(0); }
     10% { opacity: 1; }
     90% { opacity: 1; }
     100% { opacity: 0; transform: translateY(-100px); }
-  }
-
-  .firma {
-    text-align: center;
-    color: #ff80c0;
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    font-size: 1em;
   }
 
   .modal {
@@ -110,13 +120,13 @@
 
   .modal-content {
     background: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 25px;
     text-align: center;
     box-shadow: 0 0 20px #ffb6d9;
     color: #ff66b3;
     font-size: 1.4em;
-    max-width: 300px;
+    max-width: 320px;
     animation: zoomIn 0.8s ease;
   }
 
@@ -125,15 +135,13 @@
     to { transform: scale(1); opacity: 1; }
   }
 
-  .nube-gato {
+  .firma {
+    text-align: center;
+    color: #ff80c0;
     position: absolute;
-    opacity: 0.15;
-    animation: moverNube 60s linear infinite;
-  }
-
-  @keyframes moverNube {
-    from { transform: translateX(-100px); }
-    to { transform: translateX(100vw); }
+    bottom: 15px;
+    width: 100%;
+    font-size: 1em;
   }
 </style>
 </head>
@@ -148,8 +156,9 @@
   <div class="modal-content" id="mensajeDia"></div>
 </div>
 
-<img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="gatito" style="left: 10%;">
-<img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="gatito" style="right: 10%; animation-delay: 2s;">
+<!-- Gatitos -->
+<img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="gatito" style="left: 15%;">
+<img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="gatito" style="right: 15%; animation-delay: 2s;">
 
 <div class="firma">Con amor, de tu amorcito 💞 Desde el 20 de julio de 2025</div>
 
@@ -177,10 +186,9 @@
     contador.textContent = `💞 Han pasado ${dias} días desde que comenzó mi amor por ti 💞`;
   }, 1000);
 
-  // Mensaje del día (se cambia manualmente)
-  const mensajeDia = "Eres la razón por la que sonrío cada mañana, mi princesita 💗";
+  // Mensaje del día
+  const mensajeDia = "Eres mi gatita hermosa, mi razón de ser 💗";
 
-  // Animación de escritura del mensaje
   function mostrarMensaje() {
     const modal = document.getElementById("modal");
     const msg = document.getElementById("mensajeDia");
@@ -202,18 +210,35 @@
     document.getElementById("modal").style.display = "none";
   });
 
-  // Mensajes flotantes variados
+  // Nubes y corazones flotantes
+  for (let n = 0; n < 4; n++) {
+    const nube = document.createElement("img");
+    nube.src = "https://cdn-icons-png.flaticon.com/512/414/414927.png";
+    nube.classList.add("nube");
+    nube.style.width = Math.random() * 80 + 50 + "px";
+    nube.style.top = Math.random() * 50 + "vh";
+    nube.style.left = Math.random() * 100 + "vw";
+    nube.style.animationDuration = 60 + Math.random() * 40 + "s";
+    document.body.appendChild(nube);
+  }
+
+  for (let c = 0; c < 6; c++) {
+    const corazon = document.createElement("img");
+    corazon.src = "https://cdn-icons-png.flaticon.com/512/833/833472.png";
+    corazon.classList.add("corazon");
+    corazon.style.width = Math.random() * 40 + 30 + "px";
+    corazon.style.top = Math.random() * 60 + "vh";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.animationDuration = 50 + Math.random() * 30 + "s";
+    document.body.appendChild(corazon);
+  }
+
+  // Mensajes flotantes románticos
   const frases = [
-    "Te amo con todo mi ser 💕", "Eres mi sol en los días nublados ☀️",
-    "Tu sonrisa es mi razón 💖", "Siempre tú, mi amor 💫",
-    "Contigo todo es mejor 💘", "Eres mi sueño hecho realidad 🌙",
-    "Cada segundo contigo vale oro 💎", "Mi corazón late por ti 💓",
-    "Tu amor es mi hogar 🏡", "Mi vida eres tú 🌹",
-    "Eres mi luz entre las estrellas ✨", "Siempre a tu lado, mi amor 💞",
-    "Tus ojos son mi cielo 💫", "Mi alma te pertenece 💖",
-    "Eres mi todo 🌷", "Nunca dejaré de amarte 💗",
-    "Tu voz es mi melodía 🎵", "Mi amor por ti crece cada día 🌸",
-    "Eres la razón de mis latidos 💓", "Mi corazón te eligió a ti 💘"
+    "Eres mi cielo rosado ☁️", "Mi gatita hermosa 💕", "Contigo todo es ternura 🐾",
+    "Tu amor me acaricia el alma 💞", "Mi corazón ronronea por ti 😻",
+    "Eres mi nube favorita ☁️", "Cada día contigo es magia ✨", "Eres mi lugar seguro 💗",
+    "Eres mi todo, mi amor 💘", "Mi vida es más dulce contigo 🍓"
   ];
 
   function crearMensajeFlotante() {
@@ -225,20 +250,7 @@
     document.body.appendChild(mensaje);
     setTimeout(() => mensaje.remove(), 8000);
   }
-  setInterval(crearMensajeFlotante, 4000);
-
-  // Nubes de gaticos pequeñas
-  for (let n = 0; n < 4; n++) {
-    const nube = document.createElement("img");
-    nube.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
-    nube.classList.add("nube-gato");
-    nube.style.width = Math.random() * 70 + 40 + "px";
-    nube.style.top = Math.random() * 60 + "vh";
-    nube.style.left = Math.random() * 100 + "vw";
-    nube.style.animationDuration = 50 + Math.random() * 50 + "s";
-    document.body.appendChild(nube);
-  }
+  setInterval(crearMensajeFlotante, 5000);
 </script>
 </body>
 </html>
-
